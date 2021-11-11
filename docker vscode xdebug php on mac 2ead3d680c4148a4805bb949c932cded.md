@@ -1,3 +1,8 @@
+# docker vscode xdebug php on mac
+
+Dockerfile - centos + apache + php7.3 - xdebug 3.* 일 경우 xdebug 
+
+```bash
 FROM centos:7
 
 # Install Apache
@@ -19,7 +24,7 @@ RUN sed -E -i -e 's/DirectoryIndex (.*)$/DirectoryIndex index.php \1/g' /etc/htt
 # Required for Xdebug compilation
 RUN yum -y install make
 
-# Install Xdebug 
+# Install Xdebug
 RUN pecl install xdebug
 
 # Add Xdebug to PHP configuration
@@ -35,5 +40,37 @@ RUN echo "" >> /etc/php.ini \
  && echo "xdebug.client_port = 9003" >> /etc/php.ini 
 
 EXPOSE 80
+
 # Start Apache
-CMD ["/usr/sbin/httpd","-D","FOREGROUND"] 
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+```
+
+### docker image  생성
+
+```bash
+docker build -t centos_apache .
+```
+
+### Container 생성
+
+```bash
+docker run --privileged -d -p 8000:80 --name centos_apache  -v ~/xdebug_docker:/var/www/html centos_apache /sbin/init
+```
+
+### centos Container  shell  로그인
+
+```bash
+docker exec -it centos_apache /bin/bash
+```
+
+### apache start
+
+```bash
+systemctl status 
+```
+
+```bash
+systemctl start httpd
+```
+
+### 브라우저에서 [http://localhost:8000](http://localhost:8000) 접속
