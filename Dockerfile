@@ -25,13 +25,16 @@ RUN pecl install xdebug
 # Add Xdebug to PHP configuration
 RUN echo "" >> /etc/php.ini \
  && echo "[xdebug]" >> /etc/php.ini \
+ && echo "; xdebug version 3.*" >> /etc/php.ini \
  && echo "zend_extension = /usr/lib64/php/modules/xdebug.so" >> /etc/php.ini \
- && echo "xdebug.remote_enable = 1" >> /etc/php.ini \
- && echo "xdebug.remote_autostart = 1" >> /etc/php.ini \
- && echo "xdebug.remote_host = host.docker.internal" >> /etc/php.ini
+ && echo "xdebug.mode = debug" >> /etc/php.ini \
+ && echo "xdebug.start_with_request=yes" >> /etc/php.ini \
+ && echo "xdebug.client_host=host.docker.internal" >> /etc/php.ini \
+ && echo "xdebug.log=/tmp/xdebug.log" >> /etc/php.ini \
+ && echo "; 9003 is now the default " >> /etc/php.ini \ 
+ && echo "xdebug.client_port = 9003" >> /etc/php.ini \
 
 EXPOSE 80
-EXPOSE 9000 
 
 # Start Apache
 CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
