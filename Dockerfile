@@ -19,7 +19,7 @@ RUN sed -E -i -e 's/DirectoryIndex (.*)$/DirectoryIndex index.php \1/g' /etc/htt
 # Required for Xdebug compilation
 RUN yum -y install make
 
-# Install Xdebug
+# Install Xdebug 
 RUN pecl install xdebug
 
 # Add Xdebug to PHP configuration

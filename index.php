@@ -4,7 +4,7 @@ phpinfo();
 header('Content-type: text/plain');
 
 // Strings 
-
+ 
 $str = 'World';  
 
 $greeting = "Hello $str";
