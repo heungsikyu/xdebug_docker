@@ -3,9 +3,9 @@
 phpinfo();
 header('Content-type: text/plain');
 
-// Strings
+// Strings 
 
-$str = 'World';
+$str = 'World';  
 
 $greeting = "Hello $str";
 

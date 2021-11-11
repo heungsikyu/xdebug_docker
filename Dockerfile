@@ -37,4 +37,4 @@ RUN echo "" >> /etc/php.ini \
 EXPOSE 80
 
 # Start Apache
-CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"] 
